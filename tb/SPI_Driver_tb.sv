@@ -6,9 +6,9 @@ module SPI_Driver_tb ();
    wire [9:0] v;
    wire CS, vReady;
    wire MOSI;
-   
+
    SPI_Driver dut(getV, vReady, v, SCLK, CS, MOSI, MISO);
-   
+
    initial begin
       getV = 0;
       SCLK = 0;
@@ -16,7 +16,7 @@ module SPI_Driver_tb ();
       MISO = 1;
       #5 getV = 1;
    end
-   
+
    logic [31:0] count = 0;
    always @(posedge SCLK) begin
       count <= count + 1;
@@ -25,9 +25,8 @@ module SPI_Driver_tb ();
          CLK2 <= ~CLK2;
       end
    end
-   
+
    always begin
       #5 SCLK = ~SCLK;
    end
-   
 endmodule

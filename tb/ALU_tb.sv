@@ -4,11 +4,11 @@ module ALU_tb();
    reg C0;
    wire [63:0] F;
    wire [3:0] status;
-   
+
    ALU dut (.Ain(A), .Bin(B), .ALUCtl(FS), .carryIn(C0), .ALUOut(F), .status(status));
-   
+
    //integer errors;
-   
+
    initial begin
       FS <= 5'b00000; // A AND B
       A <= 64'b110;
@@ -48,7 +48,7 @@ module ALU_tb();
       B <= {$random, $random};
       C0 <= $random;
    end
-   
+
    // implement the ALU a second time in behavior verilog to come up with an expected value
    // then compare the two
    reg [63:0] Fexp;
@@ -56,7 +56,7 @@ module ALU_tb();
    wire [63:0] A2, B2; 
    assign A2 = FS[1] ? ~A : A;
    assign B2 = FS[0] ? ~B : B;
-   
+
    always @(*) begin
       case (FS[4:2])
          3'b000: Fexp <= A2 & B2;

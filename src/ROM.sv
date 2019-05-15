@@ -8,7 +8,7 @@ module ROM(
    initial $readmemb("C://(ROM file path)", mem);
    always_comb out = mem[address[31:2]];
    */
-   
+
    // Use this code for a 64 bit wide rom file
    logic [63:0] mem64[0:2047];
    initial $readmemb("C://(ROM file path)", mem64);

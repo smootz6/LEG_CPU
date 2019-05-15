@@ -5,9 +5,9 @@ module RegFile_tb();
    reg W, reset, clock;
    // create wires for the output of the DUT
    wire [63:0]A, B;
-   
+
    RegFile dut (.readDataA(A), .readDataB(B), .readRegA(SA), .readRegB(SB), .writeData(D), .writeReg(DA), .write(W), .rst(reset), .clk(clock));
-   
+
    // give all inputs initial values
    initial begin
       D <= 0;
@@ -38,7 +38,7 @@ module RegFile_tb();
       #20
       $stop; 
    end
-   
+
    //simulate clock with period of 10 ticks
    always
       #5 clock <= ~clock;
@@ -60,7 +60,7 @@ module RegFile_tb();
    wire [63:0]R10, R11, R12, R13, R14, R15, R16, R17, R18, R19;
    wire [63:0]R20, R21, R22, R23, R24, R25, R26, R27, R28, R29;
    wire [63:0]R30, R31;
-   
+
    assign R00 = dut.regs[0];
    assign R01 = dut.regs[1];
    assign R02 = dut.regs[2];

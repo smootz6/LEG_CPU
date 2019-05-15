@@ -3,7 +3,6 @@ module RAM_tb();
    wire [63:0] data_out;
    reg [63:0] data_in;
    reg [11:0] address;
-      
    wire [63:0] mem0, mem24, mem25, mem257;
 
    RAM dut (
@@ -17,13 +16,13 @@ module RAM_tb();
     );
    defparam dut.DATA_WIDTH = 64;
    defparam dut.ADDR_WIDTH = 12;
-    
-    assign mem0 = dut.mem[0];
-    assign mem24 = dut.mem[24];
-    assign mem25 = dut.mem[25];
-    assign mem257 = dut.mem[257];
-    
-    initial begin
+
+   assign mem0 = dut.mem[0];
+   assign mem24 = dut.mem[24];
+   assign mem25 = dut.mem[25];
+   assign mem257 = dut.mem[257];
+
+   initial begin
       clock <= 1'b0;
       chip_select <= 1'b0;
       write_enable <= 1'b0;
@@ -31,10 +30,10 @@ module RAM_tb();
       address <= 12'h0;
       data_in <= 64'hA5;
    end
-   
+
    always
       #5 clock <= ~clock;
-      
+
    always begin
       #10 write_enable <= 1'b1; // should do nothing
       #10 chip_select <= 1'b1; // M[0] <= A5
@@ -56,5 +55,4 @@ module RAM_tb();
       #10 address <= 12'h101; // data <= M[257]
       #10 $stop;
    end
-   
 endmodule

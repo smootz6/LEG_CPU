@@ -5,28 +5,28 @@ module DataPath(
    output logic [3:0] Flags = 0,
    output logic [3:0] Status,
    output logic [31:0] Instruction,
-   
+
    input SCLK,
    output CS,
    output MOSI,
    input MISO,
-   
+
    input [9:0] SW,
    input [2:0] BUTTON,
-   
+
    output [6:0] HEX0,
    output [6:0] HEX1,
    output [6:0] HEX2,
    output [6:0] HEX3,
-   
+
    output [15:0] r0, r1, r2, r3, r4, r5, r6, r7
    );
-   
+
    logic [63:0] SpiReg, SWReg, BUTTONReg;
    logic [11:0] vOut;
    logic [11:0] HexIn = 0;
 
-	
+
    logic PCSrc, ALUSrc, ALUCarryIn,
       MemWrite, RegWrite, SetFlags;
    logic [1:0] PCSel, DataSrc;
@@ -87,7 +87,7 @@ module DataPath(
       .ALUOut(ALUOut), 
       .status(Status)
    );
-   
+
    always_ff @(posedge Clk) begin
       if (SetFlags) Flags <= Status;
    end
@@ -113,7 +113,7 @@ module DataPath(
       .address(PCOut),
       .out(Instruction)
    );
-   
+
    always_comb begin
       SpiReg = vOut;
       SWReg = SW[9:0];
@@ -126,7 +126,7 @@ module DataPath(
       .MOSI(MOSI), 
       .MISO(MISO)
    );
-   
+
    always_ff @(posedge Clk) begin
       if (ALUOut[11:0] == 4095 && MemWrite) begin
          HexIn <= Data[11:0];

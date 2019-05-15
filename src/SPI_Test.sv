@@ -11,7 +11,7 @@ module SPI_Test(
    assign GPIO0_D[3:1] = {SCLK, CS, MOSI};
    assign MISO = GPIO0_D[0];
    assign HEX3_DP = 0;
-   
+
    logic [31:0] count = 0;
    always @(posedge CLOCK_50) begin
       count <= count + 1;
@@ -20,13 +20,13 @@ module SPI_Test(
          SCLK <= ~SCLK;
       end
    end
-   
+
    /*always_ff @(posedge CLOCK_50) begin
       if (CS) begin
          voltage = (vOut * 3300 / 1023);
       end
    end*/
-   
+
    SPI_Driver spi( 
       .vOut(voltage), 
       .SCLK(SCLK), 
@@ -34,7 +34,7 @@ module SPI_Test(
       .MOSI(MOSI), 
       .MISO(MISO)
    );
-   
+
    binary_to_hex u0 (voltage, HEX3, HEX2, HEX1, HEX0);
 endmodule
 

@@ -1,14 +1,14 @@
 module Control(
-		input clk, rst,
+      input clk, rst,
       input [31:0] in,
       input [3:0] flags,
       input [3:0] status,
       output logic [29:0] CtrlWord,
       output logic [63:0] K
    );
-   
+
    logic fetch;
-	logic [3:0] EXState;
+   logic [3:0] EXState;
    logic [10:0] op;
    logic PCSrc, ALUSrc, ALUCarryIn,
          RAMWrite, RegWrite,
@@ -38,17 +38,18 @@ module Control(
          PCSel = 0;
          RegWrite = 0;
          RAMWrite = 0;
+         SetFlags = 0;
          fetch <= 1;
       end
       else if (fetch) begin
-				PCSel <= 0;
+            PCSel <= 0;
             RegWrite <= 0;
             RAMWrite <= 0;
             SetFlags <= 0;
             ALUCarryIn <= 0;
             EXState <= 0;
             fetch <= 0;
-		end
+      end
       else begin
          if (op[5]) begin // All Branches
             case (op[10:8])

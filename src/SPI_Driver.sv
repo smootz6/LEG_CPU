@@ -5,13 +5,13 @@ module SPI_Driver (
       output logic MOSI = 0,
       input MISO
    );
-   
+
    logic [9:0] v;
    logic [31:0] inState = 0;
    logic [31:0] outState = 0;
-   
+
    assign vOut = (v * 3300 / 1023);
-   
+
    always_ff @(negedge SCLK) begin
       if (outState >= 0 && outState <= 1) begin
          CS <= 0;
@@ -25,7 +25,7 @@ module SPI_Driver (
          outState <= 0;
       end
    end
-   
+
    always_ff @(posedge SCLK) begin
       if (outState == 8 && inState == 0) begin
          v[9] <= MISO;
@@ -59,6 +59,4 @@ module SPI_Driver (
          inState <= 0;
       end
    end
-
 endmodule
-   

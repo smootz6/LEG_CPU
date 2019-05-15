@@ -13,4 +13,4 @@ module ROM_tb();
    always #5 clk = ~clk;
    wire [31:0] mem[0:4095];
    assign mem = dut.mem;
-endmodule            
+endmodule

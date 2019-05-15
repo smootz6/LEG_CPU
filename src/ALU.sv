@@ -7,7 +7,7 @@ module ALU(
    );
    logic [63:0] A, B;
    logic [64:0] sum;
-   
+
    always_comb begin
       A = ALUCtl[1] ? ~Ain : Ain;
       B = ALUCtl[0] ? ~Bin : Bin;

@@ -14,7 +14,6 @@ module PC(
          2: PCOut <= PCIn;
          3: PCOut <= PCOut + PCIn * 4 + 4;
       endcase
-      
    end
    always_comb PC4 = PCOut + 4;
 endmodule
